@@ -1,0 +1,187 @@
+﻿@model NewsApplication.Models.News
+@{
+    ViewBag.Title = "AddMasterSubCategories";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .endBox {
+        display: flex;
+        justify-content: center;
+        align-items: end;
+    }
+
+    .btn {
+        width: 7rem;
+    }
+
+    .Headings1 {
+        border-radius: 9px;
+        display: flex;
+        background: teal;
+        color: #fff;
+        font-size: 1.1rem;
+        box-shadow: -2px 0px 9px 1px #008080;
+    }
+
+    .MainHeadin {
+        text-align: center;
+        padding: 0.4rem;
+        font-style: italic;
+        font-weight: 600;
+        text-shadow: 1px 1px 1px black;
+    }
+
+    span {
+        font-family: serif;
+        /* text-shadow: 1px 0px 1px black; */
+        font-weight: 900;
+        font-style: oblique;
+    }
+
+    .btn {
+        font-style: oblique;
+       
+        font-weight: 600;
+        font-family: -webkit-body;
+    }
+    @@media (max-width: 575.98px) {
+        /* Your CSS for extra small devices */
+        .endBox {
+            margin-top: 1rem;
+        }
+
+        th {
+            font-size: 8px;
+        }
+
+        td {
+            font-size: 8px;
+        }
+
+        .innerHtmlDiv input {
+            font-size: 0.8rem;
+            width: 3rem;
+        }
+
+        .innerHtmlDiv {
+            gap: 0.5rem;
+        }
+        .tab-title {
+            margin-top: 1rem;
+        }
+    }
+
+</style>
+<br>
+<div class="Heading row Headings1">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <div style="text-align:center" class="MainHeadin">News Sub Categories</div>
+    </div><div class="col-sm-2"></div>
+</div>
+<br>
+<div class="row" style="box-shadow: -2px 0px 9px 1px #129bdd; padding: 2rem; border-radius: 12px; box-shadow: -2px 0px 9px 1px #008080; ">
+    @using (@Html.BeginForm("AddMasterSubCategories", "Admin", FormMethod.Post))
+    {
+
+        <div id="MainDive" class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+                <span>Categories</span><span style="color:red">*</span>
+                @Html.DropDownListFor(m => m.TabID, Model.ListTabTitle, new { @class = "form-control", @id= "TabID" })
+            </div>
+            <div class="col-sm-4 tab-title">
+                <span>Enter New SubCategories</span><span style="color:red">*</span>
+                @Html.TextBoxFor(m => m.SubTabTitle, new { @class = "form-control" })
+            </div>
+            <div class="col-sm-2 endBox">
+                <input type="submit" value="Add" id="Save" class="btn btn-outline-success"><input type="button" style="margin-left:1rem;display:none" id="Update" value="Update" onclick="
+                        UpdateData(this)" class="btn btn-outline-info">
+                <input type="button" style="display:none" value="Cancel" id="Cancel" onclick="CancelData(this)" class="btn btn-outline-danger mx-3">
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    }
+</div>
+<br />
+<div class="row" style="box-shadow: -2px 0px 9px 1px #129bdd; padding: 2rem; border-radius: 12px; box-shadow: -2px 0px 9px 1px #008080; ">
+    <table class="table table-bordered">
+        <thead><tr><th>Sr.No</th><th>Categories Name</th><th>Sub Categories Name</th><th class="text-md-center">Action</th></tr></thead>
+        <tbody id="MainBody">
+            @if (Model != null)
+            {
+
+                if (Model.NewsList.Count > 0)
+                {
+                    for (int i = 0; i < Model.NewsList.Count; i++)
+                    {
+                        <tr>
+                            <td>@(i+1)</td>
+                            <td>
+                                @Model.NewsList[i].TabTitle
+                            </td>
+                            <td>@Model.NewsList[i].SubTabTitle</td>
+                            <td class="d-flex justify-content-center align-content-between gap-3"><i style="color:#0d6efd" onclick="EditData('@Model.NewsList[i].TabID','@Model.NewsList[i].SubTabID',this)" class="bi bi-pencil-square" value="Edit"></i><i  onclick="Remove(@Model.NewsList[i].SubTabID,this)"style="color:#dc3545" class="bi bi-trash3"></i></td>
+                        </tr>
+                    }
+
+
+                }
+
+            }
+
+            <tr></tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function EditData(catId,id, obj) {
+
+        debugger
+        $('#TabID').val(catId);
+        $('#SubTabTitle').val(obj.parentNode.parentElement.children[2].innerText)
+        document.getElementById('Update').style.display = "block";
+        $('#Update').attr('cId', id);
+        document.getElementById('Cancel').style.display = "block";
+        document.getElementById('Save').style.display = "none";
+    }
+    function CancelData(obj) {
+        debugger
+        $('#SubTabTitle').val('')
+        document.getElementById('Update').style.display = "none";
+        document.getElementById('Cancel').style.display = "none";
+        document.getElementById('Save').style.display = "block";
+
+    }
+    function UpdateData(obj) {
+        debugger
+        $.ajax({
+            url: `/Admin/SubTabTitleEditDelete`,
+            type: 'Post',
+            data: { SubTabTitle: document.getElementById('SubTabTitle').value, SubTabID: obj.getAttribute('cid'), TabID: ocument.getElementById('TabID').value },
+            success: function (data) {
+
+                document.location.href = document.location.href
+            }, error: function () {
+
+            }
+
+        })
+    }
+    function Remove(obj) {
+        $.ajax({
+            url: `/Admin/NewsPrioitiseEditDelet`,
+            type: 'Post',
+            data: { mode: "delete", SubTabID: obj },
+            success: function (data) {
+
+                document.location.href = document.location.href
+            }, error: function () {
+
+            }
+
+        })
+    }
+</script>

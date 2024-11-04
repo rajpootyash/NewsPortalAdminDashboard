@@ -1,0 +1,163 @@
+﻿@model NewsApplication.Models.News
+@{
+    ViewBag.Title = "AddPoolsQuestionier";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .endBox {
+        display: flex;
+        justify-content: center;
+        align-items: end;
+    }
+
+    .btn {
+        width: 7rem;
+    }
+
+    .Headings1 {
+        border-radius: 9px;
+        display: flex;
+        background: teal;
+        color: #fff;
+        font-size: 1.1rem;
+        box-shadow: -2px 0px 9px 1px #008080;
+    }
+
+    .MainHeadin {
+        text-align: center;
+        padding: 0.4rem;
+        font-style: italic;
+        font-weight: 600;
+        text-shadow: 1px 1px 1px black;
+    }
+
+    span {
+        font-family: serif;
+        /* text-shadow: 1px 0px 1px black; */
+        font-weight: 900;
+        font-style: oblique;
+    }
+
+    .btn {
+        font-style: oblique;
+        color: green;
+        font-weight: 600;
+        font-family: -webkit-body;
+    }
+</style>
+<br>
+<div class="Heading row Headings1">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <div style="text-align:center" class="MainHeadin">Add News Sub Categories</div>
+    </div><div class="col-sm-2"></div>
+</div>
+<br>
+<br>
+<div class="row" style="box-shadow: -2px 0px 9px 1px #129bdd;padding:1rem; border-radius: 12px; box-shadow: -2px 0px 9px 1px #008080; ">
+
+    @using (@Html.BeginForm("AddPoolsQuestionier", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+
+        <div id="MainDive" class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <span>Categories</span><span style="color:red">*</span>
+                        @Html.DropDownListFor(m => m.TabID, Model.ListTabTitle, new { @class = "form-control" })
+                    </div>
+                    @*<div class="col-sm-4">
+                        <span> Sub SubCategories</span><span style="color:red">*</span>
+                        @Html.DropDownListFor(m => m.SubTabID, Model.ListSubCategories, new { @class = "form-control" })
+                    </div>*@
+                    <div class="col-sm-4">
+                        <span>Select Pools Priorities </span><span style="color:red">*</span>
+                        @Html.DropDownListFor(m => m.NewsPreoritieslevel_ID
+                   , Model.ListNewsType, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <br>
+        <div id="MainDive2" class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <span>Enter News Question</span><span style="color:red">*</span>
+                        @Html.TextBoxFor(m => m.NewsPreoritieslevel_ID, new { @class = "form-control" })
+                    </div>
+                    <div class="col-sm-4">
+                        <span>News Title</span><span style="color:red">*</span>
+                        @Html.TextBoxFor(m => m.NewsTitle, new { @class = "form-control" })
+                    </div>
+                    <div class="col-sm-4">
+                        <span>News Description </span><span style="color:red">*</span>
+                        @Html.TextBoxFor(m => m.NewDescription, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <br>
+        <div id="MainDive3" class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <span>Upload Cover File</span>
+                        @Html.TextBoxFor(m => m.CoverFile, new { @class = "form-control", @id = "CoverFile", @type = "file" })
+                    </div>
+                    <div class="col-sm-4">
+                        <span>Upload Video File</span>
+                        @Html.TextBoxFor(m => m.VideoFile, new { @class = "form-control", @id = "VideoFile", @type = "file" })
+                    </div>
+                    <div class="col-sm-4">
+                        <span>Upload Audio File </span>
+                        @Html.TextBoxFor(m => m.AudioFile, new { @class = "form-control", id = "AudioFile", @type = "file" })
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <br />
+        <div id="MainDive4" class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <span>Full Description of  News</span>
+                        @Html.TextAreaFor(m => m.FullNewDescription, new { @class = "form-control", @id = "NewDescription" })
+                    </div>
+                    <div class="col-sm-4">
+                        <span>News Any Url</span>
+                        @Html.TextBoxFor(m => m.Url, new { @class = "form-control", @id = "Url" })
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-sm-1"></div>
+        </div>
+        <br>
+        <div id="MainDive5" class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-sm-5"></div>
+                    <div class="col-sm-2"><input type="submit" value="Save" class="btn btn-outline-success"></div>
+                    <div class="col-sm-5"></div>
+
+                </div>
+            </div>
+
+            <div class="col-sm-1"></div>
+        </div>
+
+
+    }
+</div>

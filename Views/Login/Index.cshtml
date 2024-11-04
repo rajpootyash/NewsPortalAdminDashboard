@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik+Mono+One&family=Sevillana&display=swap" rel="stylesheet">
+<style>
+    p {
+        text-align: center;
+        letter-spacing: 1px;
+              text-transform: uppercase;
+        font-weight: 700;
+        font-family: system-ui;
+        font-size: 1.5rem;
+        color: #428e8a;
+        font-family: "Poppins", sans-serif;
+
+        font-style: normal;
+    }
+    button {
+        font-family: "Poppins", sans-serif;
+       
+    }
+    .inp {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-radius: unset;
+        border-bottom: 1px solid #428e8a;
+    }
+    
+    .btn {
+        background: #f3c404;
+        color: #fff;
+        letter-spacing: 1px;
+        font-weight: 600;
+        font-size: medium;
+        text-transform: uppercase;
+    }
+    span {
+        color: #428e8a;
+    }
+
+    @@media (max-width: 575.98px) {
+        /* Your CSS for extra small devices */
+        .m-mainBox {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #Binding {
+            height: 60%;
+        }
+    }
+
+    /* Small Devices (Phones, Landscape Mode) */
+    @@media (min-width: 576px) and (max-width: 767.98px) {
+        /* Your CSS for small devices */
+        .m-mainBox {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #Binding {
+            height: 60%;
+        }
+    }
+
+    /* Medium Devices (Tablets) */
+    @@media (min-width: 768px) and (max-width: 991.98px) {
+        /* Your CSS for medium devices */
+        .m-mainBox {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .m-img{
+            display:flex;
+        }
+        #Binding {
+            height: 60%;
+        }
+    }
+
+</style>
+<div class="row" style="height:100%" >
+    <div class="col-lg-2 col-md-1  col-1"></div>
+    <div class="col-lg-8 m-mainBox col-md-10 col-10">
+        <br>
+        <div class="row" id="Binding"  style="box-shadow: 0rem 0rem 1rem 0rem #368a8f;border-radius:1rem" >
+            <div class="col-md-6 col-sm-12 d-flex justify-content-center align-items-center" style=" border-right: 1px solid #428e8a;">
+                <div class="row p-4">
+                   
+                        <p>Welcome</p>
+                        @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+                        {
+
+                            <div><span>Username</span><input class="form-control inp" id="Username" name="username"></div>
+                            <br>
+                            <div><span>Password</span><input class="form-control inp" id="Password" name="password"></div>
+                            <br>
+                            <div style=" display: flex; justify-content: space-between;"><div><input class="" type="checkbox"/>
+                                <span style="margin-left:1rem">Remember me</span></div><div><a href="" style=" color: #428e8a;">Forget Password ?</a></div>
+                                </div>
+                            <br>
+                            <button class="btn form-control" style="background: #f3c404; color:#fff; " type="submit">Submit</button>
+                        }
+                   
+                </div>
+            </div>
+            <div class="col-md-6 m-img col-sm-12">
+                <img src="~/Content/Login-02.jpg" class="img-fluid text-center" />
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-1 col-1"></div>
+</div>
